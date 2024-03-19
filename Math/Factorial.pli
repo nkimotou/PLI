@@ -1,0 +1,36 @@
+/* PL/I program to calculate the factorial of a number */
+
+DECLARE N FIXED BINARY (31);
+DECLARE FACT FIXED BINARY (31);
+DECLARE I FIXED BINARY (31);
+
+DECLARE FUNCTION FACTORIAL (X FIXED BINARY (31));
+
+N = 0;
+DO WHILE (N <= 0);
+    PUT SKIP LIST('Enter a non-negative integer: ');
+    GET LIST(N);
+    IF N <= 0 THEN
+        PUT SKIP LIST('Please enter a non-negative integer.');
+END;
+
+FACT = FACTORIAL(N);
+
+PUT SKIP LIST('The factorial of ');
+PUT N;
+PUT SKIP LIST(' is ');
+PUT FACT;
+
+END;
+
+/* Function to calculate factorial */
+FACTORIAL: PROCEDURE(X) RETURNS(FIXED BINARY (31));
+    DECLARE X FIXED BINARY (31);
+    DECLARE RESULT FIXED BINARY (31);
+
+    IF X = 0 THEN
+        RESULT = 1;
+    ELSE
+        RESULT = X * FACTORIAL(X - 1);
+    RETURN(RESULT);
+END FACTORIAL;
